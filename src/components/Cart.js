@@ -1,11 +1,13 @@
-import { Button, Col, ListGroup, Row } from "react-bootstrap";
+import { Button, Col, Form, Image, ListGroup, Row } from "react-bootstrap";
 import { Cartstate } from "../context/Context"
 import { useEffect, useState } from "react";
+import Rating from "./Rating";
+import { AiFillDelete } from "react-icons/ai";
 
 const Cart = () => {
   const {
     state: {cart},
-    // dispatch,
+    dispatch,
   } = Cartstate();
 
   const [total, setTotal ] = useState();
@@ -16,16 +18,46 @@ const Cart = () => {
   console.log(cart);
   return (
     <div className="cart">
-      <div className="productContainer">
+      <div className="cartContainer">
         <ListGroup>
           {cart.map(prod => (
-            <ListGroup.Item>
+            <ListGroup.Item key={prod.id}>
               <Row>
-                <Col md={2}> 
-                  <span>{prod.name}</span>
+                <Col md={2} className="mobileFlex">
+                  <Image className="mobileCartImg" src={prod.image} alt={prod.name} fluid rounded/>
+                  <div className="mobileFlexTitle">
+                    <span>{prod.name}</span>
+                    <span>&#x20B9;{prod.price}</span>
+                  </div>
+                  <Rating rating={prod.rating} />
                 </Col>
-                <Col md={2}>
-                  <span>&#x20B9;{prod.price}</span>
+              </Row>
+              <Row>
+                <Col md={2} >
+                  <Form.Select aria-label="Default select example" 
+                    onChange={(e) => dispatch({
+                      type:'change_cart_qty',
+                      payload:{
+                        id:prod.id,
+                        qty:e.target.value,
+                      },
+                    })}
+                  >
+                    {[...Array(prod.inStock).keys()].map((x)=>(
+                      <option key={x+1}>{x+1}</option>
+                    ))}
+                  </Form.Select>
+                  <Button
+                    type="button"
+                    variant="dark"
+                    className="mobileButton"
+                    onClick={() => dispatch({
+                      type:'remove_from_cart',
+                      payload:prod,
+                  })}
+                  >
+                  <AiFillDelete fontSize="20px"/>
+                  </Button>
                 </Col>
               </Row>
             </ListGroup.Item>
@@ -36,7 +68,7 @@ const Cart = () => {
           <span className="title">
             Subtotal {cart.length} items
           </span>
-          <span style={{ fontWeight:700, fontSize:20}}>Total: &#x20B9; {total}</span>
+          <span style={{ fontWeight:700, fontSize:15}}>Total: &#x20B9; {total}</span>
           <Button type='button' disabled={cart.length === 0}>
             Checkout
           </Button>
