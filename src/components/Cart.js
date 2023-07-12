@@ -23,17 +23,17 @@ const Cart = () => {
           {cart.map(prod => (
             <ListGroup.Item key={prod.id}>
               <Row>
-                <Col md={2} className="mobileFlex">
+                <div className="mobileFlex">
                   <Image className="mobileCartImg" src={prod.image} alt={prod.name} fluid rounded/>
                   <div className="mobileFlexTitle">
                     <span className="cartTitle">{prod.name}</span>
                     <span>&#x20B9;{prod.price}</span>
                   </div>
                   <Rating rating={prod.rating} />
-                </Col>
+                </div>
               </Row>
               <Row>
-                <Col md={2} >
+                <div md={2} >
                   <Form.Select aria-label="Default select example" 
                     onChange={(e) => dispatch({
                       type:'change_cart_qty',
@@ -58,7 +58,7 @@ const Cart = () => {
                   >
                   <AiFillDelete fontSize="20px"/>
                   </Button>
-                </Col>
+                </div>
               </Row>
             </ListGroup.Item>
           ))}
