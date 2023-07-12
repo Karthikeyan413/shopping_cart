@@ -56,7 +56,34 @@
 .title {
     font-size: 30px;
 }
-
+.mobileCartImg{
+    width: 30%;
+    object-fit: cover;
+}
+.mobileViewPrice,.mobileViewDelivery{
+    font-size: 15px;
+}
+.mobileViewButton{
+    font-size: 10px !important;
+    width: 100%;
+}
+.mobileFlex {
+    display: flex;
+    justify-content: space-between;
+}
+.mobileFlexTitle {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: space-around;
+    align-items: center;
+}
+.mobileButton {
+    width: 100%;
+}
+.cartTitle {
+    font-size: 20px;
+}
 @media (max-width: 771px) {
     .side_cont {
         width: 100%;

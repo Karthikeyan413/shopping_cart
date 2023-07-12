@@ -26,7 +26,7 @@ const Cart = () => {
                 <Col md={2} className="mobileFlex">
                   <Image className="mobileCartImg" src={prod.image} alt={prod.name} fluid rounded/>
                   <div className="mobileFlexTitle">
-                    <span>{prod.name}</span>
+                    <span className="cartTitle">{prod.name}</span>
                     <span>&#x20B9;{prod.price}</span>
                   </div>
                   <Rating rating={prod.rating} />
